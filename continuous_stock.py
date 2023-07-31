@@ -1,4 +1,4 @@
-continuous_stock.py
+
 
 import asyncio
 from datetime import datetime
@@ -29,19 +29,19 @@ def lookup_ticker(company):
 
 
 
-"""
-async def get_temperature_from_openweathermap(lat, long):
-    logger.info("Calling get_temperature_from_openweathermap for {lat}, {long}}")
-    api_key = get_API_key()
-    open_weather_url = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={long}&appid={api_key}&units=imperial"
-    logger.info(f"Calling fetch_from_url for {open_weather_url}")
+
+async def get_stock_price(ticker):
+    logger.info("Calling get_stock_price for {ticker}")
+   # api_key = get_API_key()
+    #open_weather_url = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={long}&appid={api_key}&units=imperial"
+    #logger.info(f"Calling fetch_from_url for {open_weather_url}")
     # result = await fetch_from_url(open_weather_url, "json")
     # logger.info(f"Data from openweathermap: {result}")
     # temp_F = data["main"]["temp"]
-    temp_F = randint(68, 77)
-    return temp_F
+    price = randint(132, 148)
+    return price 
 
-
+"""
 # Function to create or overwrite the CSV file with column headings
 def init_csv_file(file_path):
     df_empty = pd.DataFrame(
