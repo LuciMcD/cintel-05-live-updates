@@ -38,7 +38,7 @@ async def update_csv_files():
         await asyncio.sleep(60)  # wait for 60 seconds
 
 app_ui = ui.page_navbar(
-    shinyswatch.theme.lumen(),
+    shinyswatch.theme.darkly(),
     ui.nav(
         "MT_Cars",
         ui.layout_sidebar(
@@ -53,7 +53,7 @@ app_ui = ui.page_navbar(
     ui.nav(ui.a("WeatherAPI", href="https://openweathermap.org/api")),
     ui.nav(ui.a("OneCallAPI", href="https://openweathermap.org/api/one-call-3")),
     ui.nav(ui.a("File_Reader", href="https://shiny.rstudio.com/py/api/reactive.file_reader.html")),
-    title=ui.h1("Case Dashboard"),
+    title=ui.h1("McDaniel Dashboard"),
 )
 
 
