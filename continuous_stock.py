@@ -25,7 +25,15 @@ def get_API_key():
 
 
 def lookup_ticker(company):
-    return F
+    stocks_dictionary = {
+        "Tesla Inc": "TSLA",
+        "General Motors Company": "GM",
+        "Toyota Motor Corporation": "TM",
+        "Ford Motor Company": "F",
+        "Honda Motor Co": "HMC",
+    },
+    company = stocks_dictionary[company],
+    return company
 
 
 
