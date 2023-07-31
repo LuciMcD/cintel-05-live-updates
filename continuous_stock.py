@@ -33,23 +33,21 @@ def lookup_ticker(company):
 async def get_stock_price(ticker):
     logger.info("Calling get_stock_price for {ticker}")
    # api_key = get_API_key()
-    #open_weather_url = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={long}&appid={api_key}&units=imperial"
-    #logger.info(f"Calling fetch_from_url for {open_weather_url}")
-    # result = await fetch_from_url(open_weather_url, "json")
-    # logger.info(f"Data from openweathermap: {result}")
-    # temp_F = data["main"]["temp"]
+    #open_stock_url = f"https://query1.finance.yahoo.com/v7/finance/options/MSTR"
+    #logger.info(f"Calling fetch_from_url for {open_stock_url}")
+    # result = await fetch_from_url(open_stock_url, "json")
+    # logger.info(f"Data from yahoo finance: {result}")
+    # price = data["main"]["price"]
     price = randint(132, 148)
     return price 
 
-"""
-# Function to create or overwrite the CSV file with column headings
 def init_csv_file(file_path):
     df_empty = pd.DataFrame(
-        columns=["Location", "Latitude", "Longitude", "Time", "Temp_F"]
+        columns=["Company", "Ticker", "Time", "Price"]
     )
     df_empty.to_csv(file_path, index=False)
 
-
+"""
 async def update_csv_location():
     ""Update the CSV file with the latest location information.""
     logger.info("Calling update_csv_location")
