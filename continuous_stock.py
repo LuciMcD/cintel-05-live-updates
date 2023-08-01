@@ -40,10 +40,10 @@ def lookup_ticker(company):
 
 
 async def get_stock_price(ticker: str):
-    #logger.info("Calling get_stock_price for {ticker}")
-    #api_key = get_API_key()
-    #stock_api_url = f"https://query1.finance.yahoo.com/v7/finance/options/{ticker}"
-    #logger.info(f"Calling fetch_from_url for {stock_api_url}")
+    logger.info("Calling get_stock_price for {ticker}")
+    api_key = get_API_key()
+    stock_api_url = f"https://query1.finance.yahoo.com/v7/finance/options/{ticker}"
+    logger.info(f"Calling fetch_from_url for {stock_api_url}")
     #result = await fetch_from_url(stock_api_url, "json")
     #logger.info(f"Data for {ticker}: {result.data}")
     #price = result.data["optionChain"]["result"][0]["quote"]["regularMarketPrice"]
@@ -76,12 +76,12 @@ async def update_csv_stock():
 
         records_deque = deque(maxlen=num_updates)
 
-        file_path = Path(__file__).parent.joinpath("data").joinpath("mtcars_stock.csv")
+        fp = Path(__file__).parent.joinpath("data").joinpath("mtcars_stock.csv")
        
-        if not os.path.exists(file_path):
-            init_stock_csv_file(file_path)
+        if not os.path.exists(fp):
+            init_stock_csv_file(fp)
 
-        logger.info(f"Initialized csv file at {file_path}")
+        logger.info(f"Initialized csv file at {fp}")
 
         for _ in range(num_updates):
             for company in companies:
@@ -97,8 +97,8 @@ async def update_csv_stock():
                 records_deque.append(new_record)
 
             df = pd.DataFrame(records_deque)
-            df.to_csv(file_path, index=False, mode="w")
-            logger.info(f"Saving stock prices to {file_path}")
+            df.to_csv(fp, index=False, mode="w")
+            logger.info(f"Saving stock prices to {fp}")
             await asyncio.sleep(update_interval)
     except Exception as e:
         logger.error(f"An error occurred in update_csv_stock: {e}")
