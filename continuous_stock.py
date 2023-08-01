@@ -40,14 +40,14 @@ def lookup_ticker(company):
 
 
 async def get_stock_price(ticker: str):
-    logger.info("Calling get_stock_price for {ticker}")
-    api_key = get_API_key()
-    stock_api_url = f"https://query1.finance.yahoo.com/v7/finance/options/{ticker}"
-    logger.info(f"Calling fetch_from_url for {stock_api_url}")
-    result = await fetch_from_url(stock_api_url, "json")
-    logger.info(f"Data for {ticker}: {result.data}")
-    price = result.data["optionChain"]["result"][0]["quote"]["regularMarketPrice"]
-    #price = randint(132, 148)
+    #logger.info("Calling get_stock_price for {ticker}")
+    #api_key = get_API_key()
+    #stock_api_url = f"https://query1.finance.yahoo.com/v7/finance/options/{ticker}"
+    #logger.info(f"Calling fetch_from_url for {stock_api_url}")
+    #result = await fetch_from_url(stock_api_url, "json")
+    #logger.info(f"Data for {ticker}: {result.data}")
+    #price = result.data["optionChain"]["result"][0]["quote"]["regularMarketPrice"]
+    price = randint(132, 148)
     return price 
 
 def init_csv_file(file_path):
@@ -97,7 +97,7 @@ async def update_csv_stock():
                 records_deque.append(new_record)
 
             df = pd.DataFrame(records_deque)
-            df.to_csv(fp, index=False, mode="w")
+            df.to_csv(file_path, index=False, mode="w")
             logger.info(f"Saving stock prices to {file_path}")
             await asyncio.sleep(update_interval)
     except Exception as e:
