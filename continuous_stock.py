@@ -39,14 +39,14 @@ def lookup_ticker(company):
 
 
 
-async def get_stock_price(ticker):
+async def get_stock_price(ticker: str):
     logger.info("Calling get_stock_price for {ticker}")
-   # api_key = get_API_key()
-    #open_stock_url = f"https://query1.finance.yahoo.com/v7/finance/options/MSTR"
-    #logger.info(f"Calling fetch_from_url for {open_stock_url}")
-    # result = await fetch_from_url(open_stock_url, "json")
-    # logger.info(f"Data from yahoo finance: {result}")
-    # price = data["main"]["price"]
+    #api_key = get_API_key()
+    #stock_api_url = f"https://query1.finance.yahoo.com/v7/finance/options/{ticker}"
+    #logger.info(f"Calling fetch_from_url for {stock_api_url}")
+    # result = await fetch_from_url(stock_api_url, "json")
+    # logger.info(f"Data for {ticker}: {result.data}")
+    # price = result.data["optionChain"]["result"][0]["quote"]["regularMarketPrice"]
     price = randint(132, 148)
     return price 
 
