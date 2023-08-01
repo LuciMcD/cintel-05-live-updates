@@ -33,8 +33,8 @@ def lookup_ticker(company):
         "Ford Motor Company": "F",
         "Honda Motor Co": "HMC",
     },
-    company = stocks_dictionary[company],
-    return company
+    ticker = stocks_dictionary[company]
+    return ticker
 
 
 
@@ -60,23 +60,45 @@ def init_csv_file(file_path):
 async def update_csv_stock():
     logger.info("Calling update_csv_stock")
     try:
+        companies = [
+            "Tesla Inc",
+            "General Motors Company",
+            "Toyota Motor Corporation",
+            "Ford Motor Company",
+            "Honda Motor Co",
+        ]
+        update_interval =60
+        total_runtime = 15 * 60
+        num_updates = 50
+        logger.info(f"update_interval: {update_interval}")
+        logger.info(f"total_runtime: {total_runtime}")
+        logger.info(f"num_updates: {num_updates}")
+
+        records_deque = deque(maxlen=num_updates)
+
         file_path = Path(__file__).parent.joinpath("data").joinpath("mtcars_stock.csv")
        
         if not os.path.exists(file_path):
-            df_empty = pd.DataFrame(
-                columns=["Company", "Ticker", "Time", "Price"]
-        ).copy()
-            df_empty.to_csv(file_path, index=False)
+            init_stock_csv_file(file_path)
 
-        df_data = pd.DataFrame({
-            "Company": ["Tesla Inc", "General Motors Company"],
-            "Ticker": ["TSLA", "GM"],
-            "Time": ["2023-07-25 12:00:00", "2023-07-25 12:01:00"],
-            "Price": [700.0, 60.0]
-        })
+        logger.info(f"Initialized csv file at {file_path}")
 
-        logger.info(f"Saving stock prices to {file_path}")
-        df_data.to_csv(file_path, index=False)
+        for _ in range(num_updates):
+            for company in companies:
+                ticker = lookup_ticker(company)
+                new_price = await get_stock_price(ticker)
+                time_now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                new_record = {
+                    "Company": company,
+                    "Ticker": ticker,
+                    "Time": time_now,
+                    "Price": new_price,
+                }
+                records_deque.append(new_record)
+
+            df = pd.DataFrame(records_deque)
+            logger.info(f"Saving stock prices to {file_path}")
+            await asyncio.sleep(update_interval)
     except Exception as e:
         logger.error(f"An error occurred in update_csv_stock: {e}")
         
