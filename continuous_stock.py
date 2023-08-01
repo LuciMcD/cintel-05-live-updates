@@ -60,7 +60,7 @@ def init_csv_file(file_path):
 async def update_csv_stock():
     logger.info("Calling update_csv_stock")
     try:
-        file_path = Path(__file__).parent.joinpath("data").joinpath("mtcars_stok.csv")
+        file_path = Path(__file__).parent.joinpath("data").joinpath("mtcars_stock.csv")
        
         if not os.path.exists(file_path):
             df_empty = pd.DataFrame(
