@@ -97,6 +97,7 @@ async def update_csv_stock():
                 records_deque.append(new_record)
 
             df = pd.DataFrame(records_deque)
+            df.to_csv(fp, index=False, mode="w")
             logger.info(f"Saving stock prices to {file_path}")
             await asyncio.sleep(update_interval)
     except Exception as e:
