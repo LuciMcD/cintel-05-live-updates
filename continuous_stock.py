@@ -39,7 +39,7 @@ def lookup_ticker(company):
 
 
 
-def get_stock_price(ticker: str):
+async def get_stock_price(ticker: str):
     logger.info("Calling get_stock_price for {ticker}")
     api_key = get_API_key()
     stock_api_url = f"https://query1.finance.yahoo.com/v7/finance/options/{ticker}"
@@ -57,7 +57,7 @@ def init_csv_file(file_path):
     df_empty.to_csv(file_path, index=False)
 
 
-def update_csv_stock():
+async def update_csv_stock():
     logger.info("Calling update_csv_stock")
     try:
         companies = [
@@ -79,7 +79,7 @@ def update_csv_stock():
         fp = Path(__file__).parent.joinpath("data").joinpath("mtcars_stock.csv")
        
         if not os.path.exists(fp):
-            init_stock_csv_file(fp)
+            init_csv_file(fp)
 
         logger.info(f"Initialized csv file at {fp}")
 
@@ -99,9 +99,9 @@ def update_csv_stock():
             df = pd.DataFrame(records_deque)
             df.to_csv(fp, index=False, mode="w")
             logger.info(f"Saving stock prices to {fp}")
-            """  
-          await asyncio.sleep(update_interval)
-          """
+             
+        await asyncio.sleep(update_interval)
+          
     except Exception as e:
         logger.error(f"An error occurred in update_csv_stock: {e}")
         
