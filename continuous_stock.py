@@ -44,10 +44,10 @@ async def get_stock_price(ticker):
     api_key = get_API_key()
     stock_api_url = f"https://query1.finance.yahoo.com/v7/finance/options/{ticker}"
     logger.info(f"Calling fetch_from_url for {stock_api_url}")
-    #result = await fetch_from_url(stock_api_url, "json")
-    #logger.info(f"Data for {ticker}: {result}")
-    #price = result.data['optionChain']['result'][0]['quote']['regularMarketPrice']
-    price = randint(132, 148)
+    result = await fetch_from_url(stock_api_url, "json")
+    logger.info(f"Data for {ticker}: {result}")
+    price = result.data['optionChain']['result'][0]['quote']['regularMarketPrice']
+    #price = randint(132, 148)
     return price 
 
 def init_csv_file(file_path):
