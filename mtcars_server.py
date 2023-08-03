@@ -206,7 +206,6 @@ def get_mtcars_server_functions(input, output, session):
     @reactive.Effect
     @reactive.event(input.MTCARS_STOCK_SELECT)
     def _():
-        """Set two reactive values (the location and temps df) when user changes location"""
         reactive_stock.set(input.MTCARS_STOCK_SELECT())
         #init_mtcars_stock_csv()
         df = get_mtcars_stock_df()
@@ -214,7 +213,6 @@ def get_mtcars_server_functions(input, output, session):
 
     @reactive.file_reader(str(csv_stocks))
     def get_mtcars_stock_df():
-        """Return mtcars temperatures pandas Dataframe."""
         logger.info(f"READING df from {csv_stocks}")
         df = pd.read_csv(csv_stocks)
         logger.info(f"READING df len {len(df)}")
@@ -223,7 +221,6 @@ def get_mtcars_server_functions(input, output, session):
     @output
     @render.text
     def mtcars_stock_string():
-        """Return a string based on selected company."""
         logger.info("mtcars_stock_company_string starting")
         selected = reactive_stock.get()
         line1 = f"Recent Price in USD for {selected}."
@@ -237,7 +234,6 @@ def get_mtcars_server_functions(input, output, session):
     @render.table
     def mtcars_stock_table():
         df = get_mtcars_stock_df()
-        # Filter the data based on the selected location
         df_stock = df[df["Stock"] == reactive_stock.get()]
         logger.info(f"Rendering Stock table with {len(df_stock)} rows")
         return df_stock
@@ -246,7 +242,6 @@ def get_mtcars_server_functions(input, output, session):
     @render_widget
     def mtcars_stock_chart():
         df = get_mtcars_stock_df()
-        # Filter the data based on the selected location
         df_stock = df[df["Stock"] == reactive_stock.get()]
         logger.info(f"Rendering Stock chart with {len(df_stock)} points")
         plotly_express_plot = px.line(
