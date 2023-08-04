@@ -14,7 +14,7 @@ from collections import deque
 
 from fetch import fetch_from_url
 from util_logger import setup_logger
-
+import csv
 
 logger, log_filename = setup_logger(__file__)
 
@@ -26,14 +26,14 @@ logger, log_filename = setup_logger(__file__)
 
 
 def lookup_ticker(company):
-    stocks_dictionary = {
+    company_dictionary = {
         "Tesla Inc": "TSLA",
         "General Motors Company": "GM",
         "Toyota Motor Corporation": "TM",
         "Ford Motor Company": "F",
         "Honda Motor Co": "HMC",
     },
-    ticker = stocks_dictionary[company]
+    ticker = company_dictionary[company]
     return ticker
 
 
@@ -45,7 +45,7 @@ async def get_stock_price(ticker):
     #stock_api_url = f"https://query1.finance.yahoo.com/v7/finance/options/{ticker}"
     #logger.info(f"Calling fetch_from_url for {stock_api_url}")
     #result = await fetch_from_url(stock_api_url, "json")
-    result = ("mtcars_stock_csv : {Price}")
+    result = pd.read_csv("mtcars_stock_csv : {Price}") #Adding this to bypass API and URL
     logger.info(f"Data for {ticker}: {result}")
     price = result.data['optionChain']['result'][0]['quote']['regularMarketPrice']
     #price = randint(132, 148)
