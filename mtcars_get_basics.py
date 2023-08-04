@@ -25,7 +25,7 @@ logger, logname = setup_logger(__name__)
 def get_mtcars_df():
     """Return mtcars pandas Dataframe."""
     p = pathlib.Path(__file__).parent.joinpath("data").joinpath("mtcars.csv")
-    # logger.info(f"Reading data from {p}")
+    logger.info(f"Reading data from {p}")
     df = pd.read_csv(p)
     return df
 
