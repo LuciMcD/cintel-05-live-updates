@@ -9,7 +9,7 @@ from random import randint
 import pandas as pd
 import yfinance as yf
 from collections import deque
-from dotenv import load_dotenv
+#from dotenv import load_dotenv
 
 
 from fetch import fetch_from_url
@@ -19,10 +19,10 @@ from util_logger import setup_logger
 logger, log_filename = setup_logger(__file__)
 
 
-def get_API_key():
-    load_dotenv()
-    key = os.getenv("OPEN_STOCK_API_KEY")
-    return key
+#def get_API_key():
+ #   load_dotenv()
+  #  key = os.getenv("OPEN_STOCK_API_KEY")
+   # return key
 
 
 def lookup_ticker(company):
@@ -41,7 +41,7 @@ def lookup_ticker(company):
 
 async def get_stock_price(ticker):
     logger.info("Calling get_stock_price for {ticker}")
-    api_key = get_API_key()
+   # api_key = get_API_key()
     stock_api_url = f"https://query1.finance.yahoo.com/v7/finance/options/{ticker}"
     logger.info(f"Calling fetch_from_url for {stock_api_url}")
     result = await fetch_from_url(stock_api_url, "json")
