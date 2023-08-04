@@ -42,9 +42,10 @@ def lookup_ticker(company):
 async def get_stock_price(ticker):
     logger.info("Calling get_stock_price for {ticker}")
    # api_key = get_API_key()
-    stock_api_url = f"https://query1.finance.yahoo.com/v7/finance/options/{ticker}"
-    logger.info(f"Calling fetch_from_url for {stock_api_url}")
-    result = await fetch_from_url(stock_api_url, "json")
+    #stock_api_url = f"https://query1.finance.yahoo.com/v7/finance/options/{ticker}"
+    #logger.info(f"Calling fetch_from_url for {stock_api_url}")
+    #result = await fetch_from_url(stock_api_url, "json")
+    result = ("mtcars_stock_csv : {Price}")
     logger.info(f"Data for {ticker}: {result}")
     price = result.data['optionChain']['result'][0]['quote']['regularMarketPrice']
     #price = randint(132, 148)
@@ -56,7 +57,7 @@ def init_csv_file(file_path):
     )
     df_empty.to_csv(file_path, index=False)
 
-
+"""
 async def update_csv_stock():
     logger.info("Calling update_csv_stock")
     try:
@@ -101,8 +102,8 @@ async def update_csv_stock():
             logger.info(f"Saving stock prices to {fp}")
              
         await asyncio.sleep(update_interval)
-          
-    except Exception as e:
-        logger.error(f"An error occurred in update_csv_stock: {e}")
         
+except Exception as e:
+    logger.error(f"An error occurred in update_csv_stock: {e}")
+      """  
         
