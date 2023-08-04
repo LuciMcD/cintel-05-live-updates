@@ -57,7 +57,7 @@ def init_csv_file(file_path):
     )
     df_empty.to_csv(file_path, index=False)
 
-"""
+
 async def update_csv_stock():
     logger.info("Calling update_csv_stock")
     try:
@@ -103,7 +103,7 @@ async def update_csv_stock():
              
         await asyncio.sleep(update_interval)
         
-except Exception as e:
-    logger.error(f"An error occurred in update_csv_stock: {e}")
-      """  
+    except Exception as e:
+        logger.error(f"An error occurred in update_csv_stock: {e}")
+
         
