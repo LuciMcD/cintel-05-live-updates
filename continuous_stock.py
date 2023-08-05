@@ -56,7 +56,7 @@ def init_csv_file(file_path):
         columns=["Company", "Ticker", "TIME", "Price"]
     )
     df_empty.to_csv(file_path, index=False)
-
+"""
 
 async def update_csv_stock():
     logger.info("Calling update_csv_stock")
@@ -105,5 +105,5 @@ async def update_csv_stock():
         
     except Exception as e:
         logger.error(f"An error occurred in update_csv_stock: {e}")
-
+"""
         
