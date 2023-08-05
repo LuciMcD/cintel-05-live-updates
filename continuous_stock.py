@@ -52,9 +52,7 @@ async def get_stock_price(ticker):
     return price 
 
 def init_csv_file(file_path):
-    df_empty = pd.DataFrame(
-        columns=["Company", "Ticker", "Time", "Price"]
-    )
+    df_empty = pd.DataFrame(columns=["Company", "Ticker", "Time", "Price"])
     df_empty.to_csv(file_path, index=False)
 
 
@@ -98,6 +96,7 @@ async def update_csv_stock():
                 records_deque.append(new_record)
 
             df = pd.DataFrame(records_deque)
+            
             df.to_csv(fp, index=False, mode="w")
             logger.info(f"Saving stock prices to {fp}")
              
