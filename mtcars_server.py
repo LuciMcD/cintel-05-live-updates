@@ -244,8 +244,11 @@ def get_mtcars_server_functions(input, output, session):
         df = get_mtcars_stock_df()
         df_stock = df[df["Company"] == reactive_stock.get()]
         logger.info(f"Rendering Price chart with {len(df_stock)} points")
+        def init_stock_csv_file(file_path):
+             df_stock = pd.DataFrame(columns=["Company", "Ticker", "Time", "Price"])
+             df_stock.to_csv(file_path, index=False)
         plotly_express_plot = px.line(
-            df_stock, x=("8:00", "8:05", "8:10", "8:15"), y="Price", color="Company", markers=True
+            df_stock, x="Time", y="Price", color="Company", markers=True
         )
         plotly_express_plot.update_layout(title="Continuous Stock Prices")
         return plotly_express_plot
