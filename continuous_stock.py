@@ -52,8 +52,8 @@ async def get_stock_price(ticker):
     return price 
 
 def init_stock_csv_file(file_path):
-    df_empty = pd.DataFrame(columns=["Company", "Ticker", "Time", "Price"])
-    df_empty.to_csv(file_path, index=False)
+    df_stock = pd.DataFrame(columns=["Company", "Ticker", "Time", "Price"])
+    df_stock.to_csv(file_path, index=False)
 
 
 async def update_csv_stock():
