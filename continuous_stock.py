@@ -51,7 +51,7 @@ async def get_stock_price(ticker):
     #price = randint(132, 148)
     return price 
 
-def init_csv_file(file_path):
+def init_stock_csv_file(file_path):
     df_empty = pd.DataFrame(columns=["Company", "Ticker", "Time", "Price"])
     df_empty.to_csv(file_path, index=False)
 
@@ -78,7 +78,7 @@ async def update_csv_stock():
         fp = Path(__file__).parent.joinpath("data").joinpath("mtcars_stock.csv")
        
         if not os.path.exists(fp):
-            init_csv_file(fp)
+            init_stock_csv_file(fp)
 
         logger.info(f"Initialized csv file at {fp}")
 
@@ -96,7 +96,7 @@ async def update_csv_stock():
                 records_deque.append(new_record)
 
             df = pd.DataFrame(records_deque)
-            
+
             df.to_csv(fp, index=False, mode="w")
             logger.info(f"Saving stock prices to {fp}")
              
